@@ -12,7 +12,7 @@ import keyboard
 from ruamel.yaml import YAML
 
 def load_cards(card_deck):
-    """Load a json file containing the flashcards"""
+    """Load a yaml file containing the flashcards"""
     yaml = YAML()
     with open(card_deck) as file:
         return yaml.load(file)
