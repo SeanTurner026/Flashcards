@@ -4,17 +4,18 @@ the English or Spanish side. The user then presses [SPACEBAR] to reveal the tran
 clear the screen, and present the next card.
 """
 import argparse
-import json
 import os
 import random
 import sys
 
 import keyboard
+from ruamel.yaml import YAML
 
 def load_cards(card_deck):
     """Load a json file containing the flashcards"""
+    yaml = YAML()
     with open(card_deck) as file:
-        return json.load(file)
+        return yaml.load(file)
 
 def read_card(card_deck):
     """Print one side of a random card from the deck"""
