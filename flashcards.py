@@ -1,0 +1,73 @@
+"""
+flashcard.py reads a json file containing flashcards, and presents the user with either
+the English or Spanish side. The user then presses [SPACEBAR] to reveal the translation,
+clear the screen, and present the next card.
+"""
+import argparse
+import json
+import os
+import random
+import sys
+
+import keyboard
+
+def load_cards(card_deck):
+    """Load a json file containing the flashcards"""
+    with open(card_deck) as file:
+        return json.load(file)
+
+def read_card(card_deck):
+    """Print one side of a random card from the deck"""
+    keys = [k for k in card_deck.keys()]
+    key = keys[random.randint(0, (len(keys) - 1))]
+    print(key.title())
+    return key
+
+def flip_card(card_deck, random_card):
+    """Print the translation of the random card from the read_card function"""
+    print('» {}{}'.format(card_deck[random_card][0].upper(), card_deck[random_card][1:]))
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Flashcard program')
+
+    parser.add_argument('-d', '--deck', action='store_false', default=False,
+                        help='specifies deck to use')
+
+    parser.add_argument('-e', '--english', action='store_false', default=False,
+                        help='specifies english to spanish mode')
+
+    parser.add_argument('-s', '--spanish', action='store_false', default=False,
+                        help='specifies spanish to english mode')
+                        
+    if '-d' not in sys.argv[1:]:
+        print('Please pass in a flashcard deck after the \'-d\' flag')
+        sys.exit()
+
+    elif '-s' not in sys.argv[1:]:
+        if '-e' not in sys.argv[1:]:
+            print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
+
+    if '-e' in sys.argv[1:]:
+        deck = load_cards(sys.argv[-1])
+        # reverse the keys with values so that the user guesses the Spanish word
+        deck = dict((v, k) for k, v in deck.items())
+        keyboard.add_hotkey('q', quit)
+        print('Press [SPACEBAR] to advance. Press [Q] at anytime to quit the program\n')
+        while True:
+            card = read_card(deck)
+            keyboard.wait('space')
+            flip_card(deck, card)
+            keyboard.wait('space')
+            os.system('clear')
+
+    elif '-s' in sys.argv[1:]:
+        deck = load_cards(sys.argv[-1])
+        keyboard.add_hotkey('q', quit)
+        print('Press [SPACEBAR] to advance. Press [Q] at anytime to quit the program\n')
+        while True:
+            card = read_card(deck)
+            keyboard.wait('space')
+            flip_card(deck, card)
+            keyboard.wait('space')
+            os.system('clear')
