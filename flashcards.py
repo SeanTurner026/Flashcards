@@ -11,11 +11,13 @@ import sys
 import keyboard
 from ruamel.yaml import YAML
 
+
 def load_cards(card_deck):
     """Load a yaml file containing the flashcards"""
     yaml = YAML()
     with open(card_deck) as file:
         return yaml.load(file)
+
 
 def read_card(card_deck):
     """Print one side of a random card from the deck"""
@@ -24,9 +26,11 @@ def read_card(card_deck):
     print(key.title())
     return key
 
+
 def flip_card(card_deck, random_card):
     """Print the translation of the random card from the read_card function"""
     print('» {}{}'.format(card_deck[random_card][0].upper(), card_deck[random_card][1:]))
+
 
 if __name__ == '__main__':
 
@@ -40,7 +44,7 @@ if __name__ == '__main__':
 
     parser.add_argument('-s', '--spanish', action='store_false', default=False,
                         help='specifies spanish to english mode')
-                        
+
     if '-d' not in sys.argv[1:]:
         print('Please pass in a flashcard deck after the \'-d\' flag')
         sys.exit()
@@ -53,22 +57,34 @@ if __name__ == '__main__':
         deck = load_cards(sys.argv[-1])
         # reverse the keys with values so that the user guesses the Spanish word
         deck = dict((v, k) for k, v in deck.items())
-        keyboard.add_hotkey('q', quit)
-        print('Press [SPACEBAR] to advance. Press [Q] at anytime to quit the program\n')
-        while True:
-            card = read_card(deck)
-            keyboard.wait('space')
-            flip_card(deck, card)
-            keyboard.wait('space')
+        # keyboard.add_hotkey('q', quit)
+        os.system('clear')
+        print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]')
+        print('There are {} cards in your deck.\n'.format(len(deck)))
+        try:
+            while True:
+                card = read_card(deck)
+                keyboard.wait('space')
+                flip_card(deck, card)
+                keyboard.wait('space')
+                os.system('clear')
+        except KeyboardInterrupt:
             os.system('clear')
+            sys.exit(0)
 
     elif '-s' in sys.argv[1:]:
         deck = load_cards(sys.argv[-1])
-        keyboard.add_hotkey('q', quit)
-        print('Press [SPACEBAR] to advance. Press [Q] at anytime to quit the program\n')
-        while True:
-            card = read_card(deck)
-            keyboard.wait('space')
-            flip_card(deck, card)
-            keyboard.wait('space')
+        # keyboard.add_hotkey('q', quit)
+        os.system('clear')
+        print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]')
+        print('There are {} cards in your deck.\n'.format(len(deck)))
+        try:
+            while True:
+                card = read_card(deck)
+                keyboard.wait('space')
+                flip_card(deck, card)
+                keyboard.wait('space')
+                os.system('clear')
+        except KeyboardInterrupt:
             os.system('clear')
+            sys.exit(0)
