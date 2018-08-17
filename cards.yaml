@@ -34,132 +34,254 @@ despertarse: to wake up
 encender: to light, turn on
 hervir: to boil
 nevar: to snow
-quebrar: to break
-regar: to water
-temblar: to tremble
-merecer: to deserve
-pertenecer: to belong
-aborrecer: to loathe
-carecer: to lack
-crecer: to grow
-enorgullecerse: to be proud, prideful
-lucir: to shine, show off
-ahorrar: to save
-competir: to compete
-despedirse: to fire, lay off, say goodbye to
-impedir: to hinder, prevent
-medir: to measure
-pedir: to ask for
-reírse: to laugh
-servir: to serve
-sonreirse: to smile
-vestirse: to dress oneself
-conseguir: to get, obtain
-corregir: to correct
-elegir: to elect, choose
-preseguir: to pursue, persecute
-seguir: to continue, follow
-componer: to prepare, put in order
-descomponer: to put out of order
-exponer: to expose, reveal, show
-posponer: to postpone, put after
-proponer: to propose, resolve
-reponer: to replace OR to make up (time)
-suponer: to suppose
-imponer: to impose
-desponer: to despose of
-oponerse: to oppose, refuse
-contener: to contain, restrain
-detener: to stop, detain
-entrenderse: to amuse oneself, delay self
-mantener: to support, maintain
-obtener: to obtain, get
-sostener: to sustain
-atribuir: to attribute
-concluir: to conclude, finish
-destituir: to dismiss, fire
-disminuir: to diminish
-distribuir: to distribute
-excluir: to exclude
-huir: to flee, escape
-incluir: to include
-influir: to influence
-instruir: to instruct, teach
-obstruir: to obstruct, block
-sustituir: to replace, substitute
-atacar: to attack
-buscar: to search
-brincar: to jump
-clsaificar: to classify
-clarificar: to clarify
-colocar: to place
-comunicar: to notify, communicate
-dedicar: to dedicate
-derrocar: to overthrow
-desempacar: to unpack
-educar: to educate
-explicar: to explain
-fabricar: to manufacture
-falsicar: to falsify
-hipotecar: to mortgage
-indicar: to indicate
-marcar: to mark
-modificar: to modify
-multiplicar: to multiply
-platicar: to chat
-predicar: to preach
-provocar: to provoke
-sacar: to take out
-sacrificar: to sacrifice
-secar: to dry
-suplicar: to touch
-unificar: to unify
-verificar: to verify
-agregar: to add
-apagar: to turn off, extinguish
-cargar: to load
-castigar: to punish
-colgar: to hang
-despegar: to separate, take off (airplane)
-encargar: to entrust, put in charge of
-entregar: to deliver
-investigar: to research
-juzgar: to judge
-llegar: to arrive
-negar: to deny
-obligar: to force, oblige
-pegar: to hit
-rogar: to beg, pray
-vengarse: to take revenge of
-abrazar: to hug
-adelgazarse: to lose weight
-alcanzar: to reach
-alzar: to raise, lift
-amenazar: to threaten
-analizar: to analyze, examine
-aterrizar: to land (airplane)
-avanzar: to advance
-comenzar: to begin
-cruzar: to cross
-danzar: to dance
-destrozar: to destroy, shatter
-economizar: to economise, save
-endulzar: to sweeten
-especializar: to specialise
-evangelizar: to evangelise, preach
-familiarizarse: to familiarise
-finalizar: to finish
-forzar: to force
-garantizar: to guarantee
-gozar: to enjoy
-hospitalizar: to hospitalise
-lanzar: to throw, shoot (gun)
-localizar: to locate, find
-memorizar: to memorise
-organizar: to organise
-realizar: to realise, carry out
-rechazar: to reject
-simpatizar: to sympathise
-tranquilizar: to calm
-tropezar: to trip, trip over, meet
-utilizar: to utilise, use
+# quebrar: to break
+# regar: to water
+# temblar: to tremble
+# merecer: to deserve
+# pertenecer: to belong
+# aborrecer: to loathe
+# carecer: to lack
+# crecer: to grow
+# enorgullecerse: to be proud, prideful
+# lucir: to shine, show off
+# ahorrar: to save
+# competir: to compete
+# despedirse: to fire, lay off, say goodbye to
+# impedir: to hinder, prevent
+# medir: to measure
+# pedir: to ask for
+# reírse: to laugh
+# servir: to serve
+# sonreirse: to smile
+# vestirse: to dress oneself
+# conseguir: to get, obtain
+# corregir: to correct
+# elegir: to elect, choose
+# preseguir: to pursue, persecute
+# seguir: to continue, follow
+# componer: to prepare, put in order
+# descomponer: to put out of order
+# exponer: to expose, reveal, show
+# posponer: to postpone, put after
+# proponer: to propose, resolve
+# reponer: to replace OR to make up (time)
+# suponer: to suppose
+# imponer: to impose
+# desponer: to despose of
+# oponerse: to oppose, refuse
+# contener: to contain, restrain
+# detener: to stop, detain
+# entrenderse: to amuse oneself, delay self
+# mantener: to support, maintain
+# obtener: to obtain, get
+# sostener: to sustain
+# atribuir: to attribute
+# concluir: to conclude, finish
+# destituir: to dismiss, fire
+# disminuir: to diminish
+# distribuir: to distribute
+# excluir: to exclude
+# huir: to flee, escape
+# incluir: to include
+# influir: to influence
+# instruir: to instruct, teach
+# obstruir: to obstruct, block
+# sustituir: to replace, substitute
+# # CAR Verbos
+# atacar: to attack
+# buscar: to search
+# brincar: to jump
+# clsaificar: to classify
+# clarificar: to clarify
+# colocar: to place
+# comunicar: to notify, communicate
+# dedicar: to dedicate
+# derrocar: to overthrow
+# desempacar: to unpack
+# educar: to educate
+# explicar: to explain
+# fabricar: to manufacture
+# falsicar: to falsify
+# hipotecar: to mortgage
+# indicar: to indicate
+# marcar: to mark
+# modificar: to modify
+# multiplicar: to multiply
+# platicar: to chat
+# predicar: to preach
+# provocar: to provoke
+# sacar: to take out
+# sacrificar: to sacrifice
+# secar: to dry
+# suplicar: to touch
+# unificar: to unify
+# verificar: to verify
+# # GAR Verbos
+# agregar: to add
+# apagar: to turn off, extinguish
+# cargar: to load
+# castigar: to punish
+# colgar: to hang
+# despegar: to separate, take off (airplane)
+# encargar: to entrust, put in charge of
+# entregar: to deliver
+# investigar: to research
+# juzgar: to judge
+# llegar: to arrive
+# negar: to deny
+# obligar: to force, oblige
+# pegar: to hit
+# rogar: to beg, pray
+# vengarse: to take revenge of
+# # ZAR Verbos
+# abrazar: to hug
+# adelgazarse: to lose weight
+# alcanzar: to reach
+# alzar: to raise, lift
+# amenazar: to threaten
+# analizar: to analyze, examine
+# aterrizar: to land (airplane)
+# avanzar: to advance
+# comenzar: to begin
+# cruzar: to cross
+# danzar: to dance
+# destrozar: to destroy, shatter
+# economizar: to economise, save
+# endulzar: to sweeten
+# especializar: to specialise
+# evangelizar: to evangelise, preach
+# familiarizarse: to familiarise
+# finalizar: to finish
+# forzar: to force
+# garantizar: to guarantee
+# gozar: to enjoy
+# hospitalizar: to hospitalise
+# lanzar: to throw, shoot (gun)
+# localizar: to locate, find
+# memorizar: to memorise
+# organizar: to organise
+# realizar: to realise, carry out
+# rechazar: to reject
+# simpatizar: to sympathise
+# tranquilizar: to calm
+# tropezar: to trip, trip over, meet
+# utilizar: to utilise, use
+# engordar: to gain weight
+# # Otros verbos usados como Gustar
+# agradar: to like, please
+# desagradar: to displease
+# pasar: to happen
+# caer bien (mal): to like (dislike), fit well (badly)
+# aborrir: to bore
+# encantar: to enchant
+# hacer falta: to miss, be lacking
+# quedar: to remain
+# alegar: to cheer
+# enojar: to anger
+# interesar: to interest
+# sorprender: to surprise
+# extrañar: to be strange
+# cansar: to tire
+# sobrar: to be left over
+# parecer: to seem
+# faltar: to lack
+# divertir: to enjoy
+# molestar: to bother
+# digustar: to dislike
+# doler: to ache
+# importar: to matter
+# preocupar: to worry
+# fascinar: to fascinate, love
+# costar: to be difficult
+# gustar: to please
+# # Expresiones Idiomáticas con vez
+# a la vez: at the same time
+# a veces: at times
+# algunas veces: sometimes
+# cada vez: everytime
+# cada vez mas (menos): more and more (less and less)
+# de vez en cuando: from time to time
+# en vez de: instead
+# esta vez: this time
+# otra vez: again
+# pocas veces: a few times
+# raras veces: seldom, rarely
+# tal vez: perhaps, maybe
+# una que otra vez: once in a while
+# varias veces: several times
+# # # Pretérito Irregulares
+# # andar (conj- pretérito irregular): anduv -e -iste -o -imos -ieron
+# # poner (conj- pretérito irregular): pus -e -iste -o -imos -ieron
+# # poder (conj- pretérito irregular): pud -e -iste -o -imos -ieron
+# # caber (conj- pretérito irregular): cup -e -iste -o -imos -ieron
+# # querer (conj- pretérito irregular): quis -e -iste -o -imos -ieron
+# # estar (conj- pretérito irregular): estuv -e -iste -o -imos -ieron
+# # tener (conj- pretérito irregular): tuv -e -iste -o -imos -ieron
+# # saber (conj- pretérito irregular): sup -e -iste -o -imos -ieron
+# # hacer (conj- pretérito irregular): hic -e -iste -o -imos -ieron
+# # ser, ir (conj- pretérito irregular): fui fuiste fue fuimos fueron
+# # dar (conj- pretérito irregular): di diste dio dimos dieron
+# # producir (conj- pretérito irregular): produje ...
+# # traducir (conj- pretérito irregular): traduje ...
+# # decir (conj- pretérito irregular): dije
+# # caer (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # leer (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # creer (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # oir (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # construier (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # huir (conj- pretérito irregular): -í -iste -yó -imos  -yeron
+# # haber (conj- pretérito irregular): hubo
+# # Miscellaneous
+# toavia: still
+# poco a poco: bit by bit
+# broma: joke
+# caer: to fall
+# vale la pena: it's worth it
+# darse cuenta: to realise
+# aunque: even though
+# llenar: to fill
+# ya pasode moda: out of fashion
+# valiosas: valuable
+# por menos: unless
+# algunos: some
+# acabar por + infinitivo: someone finally something
+# dejar de + infinitivo: to stop, fail, neglect
+# olvidar: to forget
+# la pared: wall
+# tanpoco: neither, not either
+# ninguno: none
+# nadie: anyone
+# ambos: both
+# hasta ahora: so far
+# alrededor de: around
+# anteayear: the day before
+# aquel fin de semana: that weekend
+# aquella noche: that night
+# ayer en la noche: yesterday night
+# esa mañana: that morning
+# esta mañana: this morning
+# tener prisa: to be in a rush
+# allá: there
+# nadie piensa en si mismo: no one thinks for themselves
+# este no es el momento: this is not the day
+# por lo general: generally, usually
+# a menudo: often
+# automatizar: to automate
+# herramientas: tools
+# subir: go up
+# algo: something
+# gastar: to waste
+# bastante: sufficient
+# perezoso: lazy
+# tienda de segundo mano: secondhand store
+# aparentemente: apparently
+# reposar: to rest in bed (when sick)
+# pieza: piece
+# dentro: in
+# valer: to value
+# celoso: jealous
+# sénales, avisos: signs
+# terminaciones: endings
+# taza: cup
+# asegurar: to assure
+# vencer: to overcome
