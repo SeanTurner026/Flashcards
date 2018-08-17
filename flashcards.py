@@ -55,8 +55,8 @@ if __name__ == '__main__':
               '\tsudo python flashcards.py -s -d cards.yaml\n\n'
               'See "python flashcards.py -h" for additional information.')
         sys.exit(0)
-        
-    if any('yaml' in arg for arg in sys.argv[1:]) == False:
+
+    if not any('yaml' in arg for arg in sys.argv[1:]):
         print('Please pass in a flashcard deck after the \'-d\' flag')
         sys.exit(0)
 
