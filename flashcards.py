@@ -1,7 +1,7 @@
 """
-flashcard.py reads a json file containing flashcards, and presents the user with either
-the English or Spanish side. The user then presses [SPACEBAR] to reveal the translation,
-clear the screen, and present the next card.
+flashcard.py reads a json file containing flashcards, and presents the user with either the English
+or Spanish side. The user then presses [SPACEBAR] to reveal the translation, clear the screen, and
+present the next card. Exit the program with [CTRL] + [C].
 """
 import argparse
 import os
@@ -28,78 +28,82 @@ def read_card(card_deck):
 
 
 def flip_card(card_deck, random_card):
-    """Print the translation of the random card from the read_card function"""
+    """Print the translation of the random card from read_card()"""
     print('» {}{}'.format(card_deck[random_card][0].upper(), card_deck[random_card][1:]))
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Flashcard program')
 
-    parser.add_argument('-d', '--deck', action='store_false', default=False,
+    parser.add_argument('-d', '--deck', action='store_false',
                         help='specifies deck to use')
 
-    parser.add_argument('-e', '--english', action='store_false', default=False,
+    parser.add_argument('-e', '--english', action='store_false',
                         help='specifies english to spanish mode')
 
-    parser.add_argument('-s', '--spanish', action='store_false', default=False,
+    parser.add_argument('-s', '--spanish', action='store_false',
                         help='specifies spanish to english mode')
 
-    if '-h' in sys.argv[1:]:
-        print(parser.parse_args())
 
-    elif sys.argv[1:] == []:
-        print('Please specify the proper flags as a command line arguments:\n\n'
-              '\tsudo python flashcards.py -e -d cards.yaml\n\n'
-              '\t\t\t  or...\n\n'
-              '\tsudo python flashcards.py -s -d cards.yaml\n\n'
-              'See "python flashcards.py -h" for additional information.')
-        sys.exit(0)
+    def main():
+        """Executes flow control to check cli flags and ensure that the program runs properly"""
+        if '-h' in sys.argv[1:]:
+            print(parser.parse_args())
 
-    if not any('yaml' in arg for arg in sys.argv[1:]):
-        print('Please pass in a flashcard deck after the \'-d\' flag')
-        sys.exit(0)
-
-    if '-d' not in sys.argv[1:]:
-        print('Please pass in a flashcard deck after the \'-d\' flag')
-        sys.exit(0)
-
-    elif '-s' not in sys.argv[1:]:
-        if '-e' not in sys.argv[1:]:
-            print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
-
-    if '-e' in sys.argv[1:]:
-        deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
-        # reverse the keys with values so that the user guesses the Spanish word
-        deck = dict((v, k) for k, v in deck.items())
-        # keyboard.add_hotkey('q', quit)
-        os.system('clear')
-        print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]')
-        print('There are {} cards in your deck.\n'.format(len(deck)))
-        try:
-            while True:
-                card = read_card(deck)
-                keyboard.wait('space')
-                flip_card(deck, card)
-                keyboard.wait('space')
-                os.system('clear')
-        except KeyboardInterrupt:
-            os.system('clear')
+        elif sys.argv[1:] == []:
+            print('Please specify the proper flags as a command line arguments:\n\n'
+                  '\tsudo python flashcards.py -e -d cards.yaml\n\n'
+                  '\t\t\t  or...\n\n'
+                  '\tsudo python flashcards.py -s -d cards.yaml\n\n'
+                  'See "python flashcards.py -h" for additional information.')
             sys.exit(0)
 
-    elif '-s' in sys.argv[1:]:
-        deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
-        # keyboard.add_hotkey('q', quit)
-        os.system('clear')
-        print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]')
-        print('There are {} cards in your deck.\n'.format(len(deck)))
-        try:
-            while True:
-                card = read_card(deck)
-                keyboard.wait('space')
-                flip_card(deck, card)
-                keyboard.wait('space')
-                os.system('clear')
-        except KeyboardInterrupt:
-            os.system('clear')
+        if not any('yaml' in arg for arg in sys.argv[1:]):
+            print('Please pass in a flashcard deck after the \'-d\' flag')
             sys.exit(0)
+
+        if '-d' not in sys.argv[1:]:
+            print('Please pass in a flashcard deck after the \'-d\' flag')
+            sys.exit(0)
+
+        elif '-s' not in sys.argv[1:]:
+            if '-e' not in sys.argv[1:]:
+                print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
+
+        if '-e' in sys.argv[1:]:
+            deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
+            # reverse the yaml keys with values so that the user guesses the Spanish word
+            deck = dict((v, k) for k, v in deck.items())
+            # keyboard.add_hotkey('q', quit)
+            os.system('clear')
+            print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]\n'
+                  'There are {} cards in your deck.\n'.format(len(deck)))
+            try:
+                while True:
+                    card = read_card(deck)
+                    keyboard.wait('space')
+                    flip_card(deck, card)
+                    keyboard.wait('space')
+                    os.system('clear')
+            except KeyboardInterrupt:
+                os.system('clear')
+                sys.exit(0)
+
+        elif '-s' in sys.argv[1:]:
+            deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
+            # keyboard.add_hotkey('q', quit)
+            os.system('clear')
+            print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]\n'
+                  'There are {} cards in your deck.\n'.format(len(deck)))
+            try:
+                while True:
+                    card = read_card(deck)
+                    keyboard.wait('space')
+                    flip_card(deck, card)
+                    keyboard.wait('space')
+                    os.system('clear')
+            except KeyboardInterrupt:
+                os.system('clear')
+                sys.exit(0)
+
+main()
