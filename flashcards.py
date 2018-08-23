@@ -9,101 +9,113 @@ import random
 import sys
 
 import keyboard
-from ruamel.yaml import YAML
 
 
-def load_cards(card_deck):
-    """Load a yaml file containing the flashcards"""
-    yaml = YAML()
-    with open(card_deck) as file:
-        return yaml.load(file)
+def load_deck(deck_file):
+    """Load a yaml file containing the flashcards
+
+    Returns a list containing lists in the following format:
+    [['word', 'translation'],
+     ['word', 'translation']]
+    """
+    with open(deck_file) as file:
+        # exclude yaml document header
+        if file.readline() is '---':
+            return [[line.split(':')[0], line.split(':')[-1][1:].split('\n')[0]]
+                    for line in file if line[0] != '#']
+
+        return [[line.split(':')[0], line.split(':')[-1][1:].split('\n')[0]]
+                for line in file if line[0] != '#']
 
 
 def read_card(card_deck):
     """Print one side of a random card from the deck"""
-    keys = [k for k in card_deck.keys()]
-    key = keys[random.randint(0, (len(keys) - 1))]
-    print(key.title())
-    return key
+    card_position = random.randint(0, (len(card_deck) - 1))
+    print(card_deck[card_position][0].title())
+    keyboard.wait('space')
+    return card_position
 
 
-def flip_card(card_deck, random_card):
+def flip_card(card_deck, card_position):
     """Print the translation of the random card from read_card()"""
-    print('» {}{}'.format(card_deck[random_card][0].upper(), card_deck[random_card][1:]))
+    print('» {}{}'.format(card_deck[card_position][1][0].upper(), card_deck[card_position][1][1:]))
+    keyboard.wait('space')
+    os.system('clear')
+    return None
+
+
+def run_deck(args):
+    """Select language and call read_card() and flip_card() alternatively"""
+    deck = load_deck(args['deck'])
+    if args['english'] is True:
+        # reverse the yaml keys with values so that the user guesses the Spanish word
+        deck = [[card[1], card[0]] for card in deck]
+
+    os.system('clear')
+    print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]\n'
+          'There are {} cards in your deck.\n'.format(len(deck)))
+    try:
+        while True:
+            card = read_card(deck)
+            flip_card(deck, card)
+
+    except KeyboardInterrupt:
+        # removes '^C' from terminal output
+        os.system('clear')
+        sys.exit(0)
+
+    return None
+
+
+def parse_command_line():
+    """Return the command line arguments as a dictionary"""
+    parser = argparse.ArgumentParser(description='Flashcard program')
+
+    parser.add_argument('-d', '--deck', nargs='?', default='cards.yaml',
+                        help='specifies deck to use')
+
+    parser.add_argument('-e', '--english', action='store_true', default=False,
+                        help='specifies english to spanish mode')
+
+    parser.add_argument('-s', '--spanish', action='store_true', default=False,
+                        help='specifies spanish to english mode')
+
+    return vars(parser.parse_args())
+
+
+def check_parsed_arguments(args):
+    """Executes flow control to check cli flags and ensure that the program runs properly"""
+    if os.getuid() != 0:
+        print('The keyboard module requires super user privileges. Please run the program as sudo')
+        sys.exit(0)
+
+    if args['deck'] is None:
+        print('Please pass in a yaml flashcard deck after the \'-d\' flag')
+        sys.exit(0)
+
+    if 'deck' not in args:
+        print('Please pass in a yaml flashcard deck after the \'-d\' flag')
+        sys.exit(0)
+
+    if '.yaml' not in args['deck']:
+        print('Please pass in a yaml flashcard deck after the \'-d\' flag')
+        sys.exit(0)
+
+    elif args['spanish'] is False:
+        if args['english'] is False:
+            print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
+            sys.exit(0)
+
+    return None
+
+
+def main():
+    """Only run when the program is run directly"""
+    args = parse_command_line()
+    check_parsed_arguments(args)
+    run_deck(args)
+
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Flashcard program')
-
-    parser.add_argument('-d', '--deck', action='store_false',
-                        help='specifies deck to use')
-
-    parser.add_argument('-e', '--english', action='store_false',
-                        help='specifies english to spanish mode')
-
-    parser.add_argument('-s', '--spanish', action='store_false',
-                        help='specifies spanish to english mode')
-
-
-    def main():
-        """Executes flow control to check cli flags and ensure that the program runs properly"""
-        if '-h' in sys.argv[1:]:
-            print(parser.parse_args())
-
-        elif sys.argv[1:] == []:
-            print('Please specify the proper flags as a command line arguments:\n\n'
-                  '\tsudo python flashcards.py -e -d cards.yaml\n\n'
-                  '\t\t\t  or...\n\n'
-                  '\tsudo python flashcards.py -s -d cards.yaml\n\n'
-                  'See "python flashcards.py -h" for additional information.')
-            sys.exit(0)
-
-        if not any('yaml' in arg for arg in sys.argv[1:]):
-            print('Please pass in a flashcard deck after the \'-d\' flag')
-            sys.exit(0)
-
-        if '-d' not in sys.argv[1:]:
-            print('Please pass in a flashcard deck after the \'-d\' flag')
-            sys.exit(0)
-
-        elif '-s' not in sys.argv[1:]:
-            if '-e' not in sys.argv[1:]:
-                print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
-
-        if '-e' in sys.argv[1:]:
-            deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
-            # reverse the yaml keys with values so that the user guesses the Spanish word
-            deck = dict((v, k) for k, v in deck.items())
-            # keyboard.add_hotkey('q', quit)
-            os.system('clear')
-            print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]\n'
-                  'There are {} cards in your deck.\n'.format(len(deck)))
-            try:
-                while True:
-                    card = read_card(deck)
-                    keyboard.wait('space')
-                    flip_card(deck, card)
-                    keyboard.wait('space')
-                    os.system('clear')
-            except KeyboardInterrupt:
-                os.system('clear')
-                sys.exit(0)
-
-        elif '-s' in sys.argv[1:]:
-            deck = load_cards([arg for arg in sys.argv if '.yaml' in arg][0])
-            # keyboard.add_hotkey('q', quit)
-            os.system('clear')
-            print('Press [SPACEBAR] to advance. Exit at anytime with [CTRL] + [C]\n'
-                  'There are {} cards in your deck.\n'.format(len(deck)))
-            try:
-                while True:
-                    card = read_card(deck)
-                    keyboard.wait('space')
-                    flip_card(deck, card)
-                    keyboard.wait('space')
-                    os.system('clear')
-            except KeyboardInterrupt:
-                os.system('clear')
-                sys.exit(0)
-
-main()
+    main()
