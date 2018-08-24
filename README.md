@@ -14,5 +14,5 @@ $ sudo python3 flashcards.py -e
 $ sudo python3 flashcards.py -s
 
 # use a flashcard deck with a name other than 'cards.yaml'
-$ sudo python3 flashcards.py -s -d <<your_deck.yaml>>
+$ sudo python3 flashcards.py -s -d verbs.yaml
 ```
