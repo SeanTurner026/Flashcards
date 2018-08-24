@@ -1,4 +1,4 @@
-Simple flashcard application
+## Simple flashcard application ![pylint Score](https://mperlet.github.io/pybadge/badges/10.svg)
 
 The user reveals the answer by pressing `spacebar`, and then moves to the next card by again pressing `spacebar`. 
 
