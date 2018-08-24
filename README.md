@@ -4,7 +4,7 @@ The user reveals the answer by pressing `spacebar`, and then moves to the next c
 
 The application can be configured using the command line flags to allow the user to guess either the Spanish (`-s`) or the English (`-e`) side. Additionally, any deck (in yaml format) can be passed in with the `-d` flag.
 
-![Imgur](https://i.imgur.com/QGEs1Cy.gifv)
+<blockquote class="imgur-embed-pub" lang="en" data-id="QGEs1Cy"><a href="//imgur.com/QGEs1Cy">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ### Usage
 
