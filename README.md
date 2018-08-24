@@ -1,4 +1,4 @@
-Simple flashcard application. 
+Simple flashcard application
 
 The user reveals the answer by pressing `spacebar`, and then moves to the next card by again pressing `spacebar`. 
 
