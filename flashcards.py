@@ -29,16 +29,16 @@ def load_deck(deck_file):
 
 
 def read_card(card_deck):
-    """Print one side of a random card from the deck"""
-    card_position = random.randint(0, (len(card_deck) - 1))
-    print(card_deck[card_position][0].title())
+    """Print one side of a card from the deck"""
+    card = random.choice(card_deck)
+    print(card[0].title())
     keyboard.wait('space')
-    return card_position
+    return card
 
 
-def flip_card(card_deck, card_position):
-    """Print the translation of the random card from read_card()"""
-    print('» {}{}'.format(card_deck[card_position][1][0].upper(), card_deck[card_position][1][1:]))
+def flip_card(card):
+    """Print the translation of the card from read_card()"""
+    print('» {}'.format(card[1].capitalize()))
     keyboard.wait('space')
     os.system('clear')
     return None
@@ -57,7 +57,7 @@ def run_deck(args):
     try:
         while True:
             card = read_card(deck)
-            flip_card(deck, card)
+            flip_card(card)
 
     except KeyboardInterrupt:
         # removes '^C' from terminal output
@@ -89,7 +89,7 @@ def check_parsed_arguments(args):
         print('The keyboard module requires super user privileges. Please run the program as sudo')
         sys.exit(0)
 
-    if args['deck'] is None:
+    if args.get('deck') is None:
         print('Please pass in a yaml flashcard deck after the \'-d\' flag')
         sys.exit(0)
 
@@ -97,12 +97,12 @@ def check_parsed_arguments(args):
         print('Please pass in a yaml flashcard deck after the \'-d\' flag')
         sys.exit(0)
 
-    if '.yaml' not in args['deck']:
+    if '.yaml' not in args.get('deck'):
         print('Please pass in a yaml flashcard deck after the \'-d\' flag')
         sys.exit(0)
 
-    elif args['spanish'] is False:
-        if args['english'] is False:
+    elif args.get('spanish') is False:
+        if args.get('english') is False:
             print('Please indicate language by passing in one of the \'-s\' or \'-e\' flags.')
             sys.exit(0)
 
