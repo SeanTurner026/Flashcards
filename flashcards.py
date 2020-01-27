@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 flashcard.py reads a yaml file containing flashcards, and presents the user with either the English
 or Spanish side. The user then presses [SPACEBAR] to reveal the translation, clear the screen, and
