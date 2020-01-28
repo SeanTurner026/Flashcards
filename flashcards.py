@@ -15,9 +15,9 @@ import ruamel.yaml
 
 class Flashcards:
     """
-    pass
+    Flashcards class takes a yaml file deck into memory, and reads cards prompting the user to
+    reveal the cards reverse when ready using the keyboard module.
     """
-
     def __init__(self):
         self.deck = ruamel.yaml.YAML()
         self.card = ['key', 'value']
@@ -59,60 +59,54 @@ class Flashcards:
                 print('» {}'.format(item))
         else:
             print('» {}'.format(
-                str(self.card[1].strip('\n'))
+                str(self.card[1]).strip('\n')
             ))
         keyboard.wait('space')
         os.system('clear')
 
-    # def check_reverse(self, reverse):
-    #     """
-    #     check_reverse() looks to see if the reverse flag was passed as an argument, and reverses
-    #     the keys and values in the deck
+    def run_deck(self):
+        """
+        run_deck() executes the programs workflow, alternating calls between read_card() and
+        flip_card().
+        """
+        try:
+            while True:
+                self.read_card()
+                self.flip_card()
 
-    #     params
-    #     :reverse - boolean cli flag
-    #     """
-    #     if reverse is True:
-    #         self.deck = [
-    #             [card[1], card[0]
-    #              ] for card in self.deck]
+        except KeyboardInterrupt:
+            # removes '^C' from terminal output
+            os.system('clear')
+            sys.exit(0)
 
-
-@click.command()
-@click.option('-f', '--file', help='specifies yaml file to use')
-# @click.option('-r', '--reverse',
-#               default=False, help='displays values prompting user to guess keys'
-#               )
-def main(file):
+def check_arguments(file):
     """
-    main() checks that the necessary flags were passed, that the program was run as sudo, and
-    executes the workflow.
+    check_arguments() ensures that the program is run as sudo (for the keyboard module), and
+    also that a yaml file was passed in with the -f flag
 
     params
     :file - local yaml file specified via cli
-    :reverse - boolean cli flag
     """
     if file is None:
         sys.exit('Please pass a yaml file to the application with the usage -f file.yaml')
     if os.getuid() != 0:
         sys.exit(
             'The keyboard module requires super user privileges. Please run the program as sudo'
-            )
+        )
+
+@click.command()
+@click.option('-f', '--file', help='specifies yaml file to use')
+def main(file):
+    """
+    main() executes the workflow.
+
+    params
+    :file - local yaml file specified via cli
+    """
+    check_arguments(file)
     flashcards = Flashcards()
     flashcards.load_deck(file)
-    # flashcards.check_reverse(reverse)
-    os.system('clear')
-
-    try:
-        while True:
-            flashcards.read_card()
-            flashcards.flip_card()
-
-    except KeyboardInterrupt:
-        # removes '^C' from terminal output
-        os.system('clear')
-        sys.exit(0)
-
+    flashcards.run_deck()
 
 if __name__ == "__main__":
     main()
